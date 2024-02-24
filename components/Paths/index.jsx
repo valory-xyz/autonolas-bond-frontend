@@ -19,19 +19,31 @@ const StyledCard = styled(Card)`
   }
 `;
 
+const ImageWrapper = styled.div`
+  margin-bottom: 8px;
+`;
+
+const TitleWrapper = styled.div`
+  margin-bottom: 16px;
+`;
+
+const PathButton = styled(Button)`
+  margin-top: 16px;
+`;
+
 const PathCard = ({ path: { id, name } }) => (
   <StyledCard>
-    <div className="mb-8">
+    <ImageWrapper>
       <Image src={`/images/paths/${id}.svg`} alt={name} width={200} height={100} />
-    </div>
-    <div className="mb-16">
+    </ImageWrapper>
+    <TitleWrapper>
       <Typography.Title className="text-center mt-0" level={5}>
         {name}
       </Typography.Title>
-    </div>
-    <Button type="primary" href={`/paths/${id}`} size="large" block>
+    </TitleWrapper>
+    <PathButton type="primary" href={`/paths/${id}`} size="large" block>
       View Path
-    </Button>
+    </PathButton>
   </StyledCard>
 );
 
