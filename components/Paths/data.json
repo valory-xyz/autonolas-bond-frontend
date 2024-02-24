@@ -1,0 +1,39 @@
+[
+  {
+    "id": "eth-olas",
+    "name": "ETH-OLAS",      
+    "imagePath": "/images/paths/eth-olas.svg",
+    "detail": "Get XDAI-OLAS LP tokens on Ethereum and bond into the Olas protocol.",
+    "links": []
+  },
+  {
+    "id": "xdai-olas",
+    "name": "XDAI-OLAS",      
+    "imagePath": "/images/paths/xdai-olas.svg",
+    "detail": "Get XDAI-OLAS LP tokens on Gnosis Chain. Bridge them back to Ethereum and bond into the Olas protocol.",
+    "links": [
+      {"headerText": "BRIDGE – OLAS FROM ETHEREUM TO GNOSIS CHAIN", "prefixText": "","linkHref": "#", "linkText": "{Bridge Name}"},
+      {"headerText": "BRIDGE – LP TOKEN FROM GNOSIS CHAIN TO ETHEREUM", "linkHref": "#", "linkText": "{Bridge Name}"},
+      {"headerText": "EXCHANGE AND POOL", "linkHref": "#", "linkText": "0x312...123", "linkPrefix": "{Exchange name}: XDAI-OLAS pool ·", "copyText": "0x312123123123123123"},
+      {"headerText": "LP TOKEN ADDRESS", "linkHref": "#", "linkText": "0x312...123", "copyText": "0x312123123123123123"},
+      {"headerText": "OLAS TOKEN ADDRESS: ETHEREUM", "linkHref": "#", "linkText": "0x312...123", "copyText": "0x312123123123123123"},
+      {"headerText": "OLAS TOKEN ADDRESS: GNOSIS CHAIN", "linkHref": "#", "linkText": "0x312...123", "copyText": "0x312123123123123123"},
+      {"headerText": "XDAI TOKEN ADDRESS: GNOSIS CHAIN", "linkHref": "#", "linkText": "0x312...123", "copyText": "0x312123123123123123"}
+    ]
+  },
+  {
+    "id": "matic-olas",
+    "name": "MATIC-OLAS",      
+    "imagePath": "/images/paths/matic-olas.svg",
+    "detail": "Get XDAI-OLAS LP tokens on Polygon. Bridge them back to Ethereum and bond into the Olas protocol.",
+    "links": []
+  },
+  {
+    "id": "arb-olas",
+    "name": "ARB-OLAS",      
+    "imagePath": "/images/paths/arb-olas.svg",
+    "detail": "Get ARB-OLAS LP tokens on Arbitrum. Bridge them back to Ethereum and bond into the Olas protocol.",
+    "links": []
+  }
+]
+
