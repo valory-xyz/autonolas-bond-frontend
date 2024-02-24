@@ -19,13 +19,17 @@ const StyledCard = styled(Card)`
   }
 `;
 
-const PathCard = ({ path: { id, name, imagePath } }) => (
+const PathCard = ({ path: { id, name } }) => (
   <StyledCard>
-    <Image src={imagePath} alt={name} width={200} height={100} />
-    <Typography.Title level={4} style={{ marginTop: 10 }}>
-      {name}
-    </Typography.Title>
-    <Button type="primary" href={`/paths/${id}`}>
+    <div className="mb-8">
+      <Image src={`/images/paths/${id}.svg`} alt={name} width={200} height={100} />
+    </div>
+    <div className="mb-16">
+      <Typography.Title className="text-center mt-0" level={5}>
+        {name}
+      </Typography.Title>
+    </div>
+    <Button type="primary" href={`/paths/${id}`} size="large" block>
       View Path
     </Button>
   </StyledCard>
@@ -35,7 +39,6 @@ PathCard.propTypes = {
   path: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    imagePath: PropTypes.string.isRequired,
   }).isRequired,
 };
 
@@ -44,7 +47,7 @@ export const Paths = () => (
     <Typography.Title style={{ marginTop: 16 }} level={2}>Paths</Typography.Title>
     <Row gutter={[24, 24]} className="mb-128">
       {pathData.map((path) => (
-        <Col key={path.id} xs={12} md={6}>
+        <Col key={path.id} xs={24} sm={24} md={12} lg={6}>
           <PathCard key={path.id} path={path} />
         </Col>
       ))}

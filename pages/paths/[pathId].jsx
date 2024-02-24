@@ -1,17 +1,27 @@
 import {
-  Typography, Row, Col, Flex, Button, message,
+  Button,
+  Card,
+  Col,
+  Collapse,
+  Flex,
+  Grid,
+  Row,
+  Typography,
 } from 'antd';
-import styled from 'styled-components';
-import Markdown from 'markdown-to-jsx';
-import { PropTypes } from 'prop-types';
-import { promises as fs } from 'fs';
-import nodePath from 'path';
+import Head from 'next/head';
 import Image from 'next/image';
+import { PropTypes } from 'prop-types';
+import styled from 'styled-components';
 
-import pathData from 'components/Paths/data.json';
+import { COLOR } from '@autonolas/frontend-library';
+import Address from 'components/Address';
 import StyledMain from 'components/GlobalStyles/StyledMain';
-import { CopyOutlined } from '@ant-design/icons';
-import Link from 'next/link';
+import PathContent from 'components/PathContent';
+import pathData from 'components/Paths/data.json';
+import { OLAS_ETHEREUM_TOKEN_ADDRESS } from 'util/constants';
+import { SITE } from 'util/meta';
+
+const { useBreakpoint } = Grid;
 
 const Upcase = styled(Typography.Text)`
   text-transform: uppercase;
@@ -19,99 +29,311 @@ const Upcase = styled(Typography.Text)`
   letter-spacing: 0.07em;
 `;
 
+const StyledCard = styled(Card)`
+  border-color: ${COLOR.BORDER_GREY};
+  width: 100%;
+  .ant-card-body {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+const StyledImageWrapper = styled.div`
+  margin-bottom: 8px;
+`;
+
+const StyledPathButton = styled(Button)`
+  margin-top: 16px;
+`;
+
 export const getServerSideProps = async (context) => {
   const { pathId } = context.params;
   const path = pathData.find((p) => p.id === `${pathId}`);
-  const markdownPath = nodePath.join(process.cwd(), 'markdown', `${path.id}.md`);
-  const markdown = await fs.readFile(markdownPath, 'utf-8').catch(() => null);
 
-  if (!path || !markdown) return { notFound: true };
+  if (!path) return { notFound: true };
   return {
     props: {
       path,
-      markdown,
     },
   };
 };
 
-const PathDetailPage = ({
+const PoolCollapseItem = ({
   path: {
-    name, imagePath, detail, links,
-  }, markdown,
+    network, bond, bridge, exchange, networkId, address,
+  }, isEthereumPath,
 }) => (
-  <StyledMain>
-    <Typography.Title className="mt-0 mb-16" level={1}>
-      {name}
-    </Typography.Title>
-    <Row gutter={[48, 48]}>
-      <Col xs={24} lg={12}>
-        <Typography.Title className="mt-0 mb-8" level={2}>
-          Path
-        </Typography.Title>
-
-        <Markdown style={{ lineHeight: '1.4' }}>{markdown}</Markdown>
-
-      </Col>
-      <Col xs={24} md={12}>
-        <Typography.Title className="mt-0 mb-8" level={2}>
-          Links and Details
-        </Typography.Title>
-        <Flex gap={24} style={{ marginBottom: 24 }} align="center">
-          <div style={{ height: 100, width: 300, position: 'relative' }}>
-            <Image src={imagePath} alt={name} fill />
-          </div>
-          <Typography.Text>{detail}</Typography.Text>
-        </Flex>
-        <Flex gap={16} vertical>
-          {links.map((link) => (
-            <PathDetailLink key={link.linkHref} link={link} />
-          ))}
-        </Flex>
-        <Button type="primary" href="https://tokenomics.olas.network/bonding-products" style={{ marginTop: 24 }}>View available products</Button>
-      </Col>
-    </Row>
-  </StyledMain>
-);
-
-const PathDetailLink = ({
-  link: {
-    headerText, linkText, linkHref, copyText, linkPrefix,
-  },
-}) => {
-  const handleCopy = () => {
-    navigator.clipboard.writeText(copyText).then(() => message.success(`Copied ${copyText} to clipboard`)).catch(() => message.error('Failed to copy to clipboard'));
-  };
-
-  return (
+  <Flex gap={16} vertical>
+    {!isEthereumPath && (
     <Flex gap={4} vertical>
-      <Upcase>{headerText}</Upcase>
+      <Upcase>
+        OLAS address on Ethereum
+      </Upcase>
       <Flex gap={8} align="center">
-        {linkPrefix && <Typography.Text>{linkPrefix}</Typography.Text>}
-        <Link href={linkHref}>{linkText}</Link>
-        {copyText && <Button onClick={handleCopy} size="small"><CopyOutlined /></Button>}
+        <Address address={OLAS_ETHEREUM_TOKEN_ADDRESS} />
       </Flex>
     </Flex>
-  );
+    )}
+    {!isEthereumPath && (
+    <Flex gap={4} vertical>
+      <Upcase>
+        Bridge OLAS from Ethereum to
+        {' '}
+        {network}
+      </Upcase>
+      <Flex gap={8} align="center">
+        <a href={bridge?.url} target="_blank" rel="noopener noreferrer">
+          {bridge?.name}
+          {' '}
+          ↗
+        </a>
+      </Flex>
+    </Flex>
+    )}
+    <Flex gap={4} vertical>
+      <Upcase>
+        OLAS address on
+        {' '}
+        {network}
+      </Upcase>
+      <Flex gap={8} align="center">
+        <Address address={address} networkId={networkId} />
+      </Flex>
+    </Flex>
+    <Flex gap={4} vertical>
+      <Upcase>
+        Pool Exchange
+      </Upcase>
+      <Flex gap={8} align="center">
+        <a href={exchange.url} target="_blank" rel="noopener noreferrer">
+          {exchange.name}
+          {' '}
+          ↗
+        </a>
+      </Flex>
+    </Flex>
+    <Flex gap={4} vertical>
+      <Upcase>
+        Pool
+      </Upcase>
+      <Flex gap={8} align="center">
+        <Address address={exchange.poolAddress} networkId={networkId} />
+      </Flex>
+    </Flex>
+    <Flex gap={4} vertical>
+      <Upcase>
+        LP Token
+      </Upcase>
+      <Flex gap={8} align="center">
+        {bond.lpTokenName}
+        {/* TODO ensure LP token address is the same as poolAddress */}
+        <Address address={exchange.poolAddress} networkId={networkId} />
+      </Flex>
+    </Flex>
+  </Flex>
+);
+
+PoolCollapseItem.propTypes = {
+  path: PropTypes.shape({
+    network: PropTypes.string.isRequired,
+    bond: PropTypes.object.isRequired,
+    bridge: PropTypes.object,
+    exchange: PropTypes.object.isRequired,
+    networkId: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+  }).isRequired,
+  isEthereumPath: PropTypes.bool.isRequired,
 };
 
-PathDetailLink.propTypes = {
-  link: PropTypes.shape({
-    headerText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
-    linkHref: PropTypes.string.isRequired,
-    linkPrefix: PropTypes.string,
-    copyText: PropTypes.string,
+const BridgeCollapseItem = ({
+  path: {
+    network, bond,
+  }, isEthereumPath,
+}) => (
+  !isEthereumPath ? (
+    <Flex gap={16} vertical>
+      <Flex gap={4} vertical>
+        <Upcase>
+          Bridge from
+          {' '}
+          {network}
+          {' '}
+          to Ethereum
+        </Upcase>
+        <Flex gap={8} align="center">
+          <a href={bond.lpTokenBridge.url} target="_blank" rel="noopener noreferrer">
+            {bond.lpTokenBridge.name}
+            {' '}
+            ↗
+          </a>
+        </Flex>
+      </Flex>
+      <Flex gap={4} vertical>
+        <Upcase>
+          Bridged LP Token Address on Ethereum
+        </Upcase>
+        <Flex gap={8} align="center">
+          Bridged
+          {' '}
+          {bond.lpTokenName}
+          <Address address={bond.bridgedLpTokenAddress} />
+        </Flex>
+      </Flex>
+    </Flex>
+  ) : 'No bridging required.'
+);
+
+BridgeCollapseItem.propTypes = {
+  path: PropTypes.shape({
+    network: PropTypes.string.isRequired,
+    bond: PropTypes.shape({
+      lpTokenBridge: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+      lpTokenName: PropTypes.string.isRequired,
+      bridgedLpTokenAddress: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
+  isEthereumPath: PropTypes.bool.isRequired,
+};
+
+const BondCollapseItem = () => (
+  <Flex gap={16} vertical>
+    <Flex gap={4} vertical>
+      <Upcase>
+        Bond LP Token into Olas Protocol
+      </Upcase>
+      <Flex gap={8} align="center">
+        <StyledPathButton
+          type="default"
+          href="https://tokenomics.olas.network/bonding-products"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View available products
+        </StyledPathButton>
+      </Flex>
+    </Flex>
+  </Flex>
+);
+
+BondCollapseItem.propTypes = {
+  path: PropTypes.shape({
+    bond: PropTypes.object.isRequired,
+  }).isRequired,
+};
+
+const PathDetailPage = ({
+  path: {
+    name, network, id, bond, networkId,
+  },
+  path,
+}) => {
+  const isEthereumPath = networkId === 'ethereum';
+  const { md } = useBreakpoint();
+
+  const detailsItems = [
+    {
+      key: '1',
+      label: 'Pool',
+      children: <PoolCollapseItem path={path} isEthereumPath={isEthereumPath} />,
+    },
+    {
+      key: '2',
+      label: 'Bridge',
+      children: <BridgeCollapseItem path={path} isEthereumPath={isEthereumPath} />,
+    },
+    {
+      key: '3',
+      label: 'Bond',
+      children: <BondCollapseItem path={path} />,
+    },
+  ];
+
+  return (
+    <>
+      <Head>
+        <title>
+          {name}
+          {' '}
+          |
+          {' '}
+          {SITE.TITLE}
+        </title>
+        <meta name="description" content={`Pool, Bridge, Bond. Everything you need to know how to bond into the Olas protocol with ${name}.`} />
+      </Head>
+      <StyledMain>
+        <Row align="middle" className="mb-24" gutter={48}>
+          <Col className={!md && 'mb-16'}>
+            <StyledCard>
+              <StyledImageWrapper>
+                <Image src={`/images/paths/${id}.svg`} alt={name} width={200} height={100} />
+              </StyledImageWrapper>
+            </StyledCard>
+          </Col>
+          <Col>
+            <div>
+              <Typography.Title className="mt-0 mb-16" level={2}>
+                {name}
+              </Typography.Title>
+              <Typography.Text>
+                Get
+                {' '}
+                {bond.lpTokenName}
+                {' '}
+                LP tokens on
+                {' '}
+                {network}
+                .
+                {' '}
+                {
+                !isEthereumPath ? 'Bridge them to Ethereum and bond into the Olas protocol.' : 'Bond them into the Olas protocol.'
+              }
+              </Typography.Text>
+            </div>
+          </Col>
+        </Row>
+        <Row gutter={[48, 48]}>
+          <Col xs={24} lg={12}>
+            <Typography.Title className="mt-0 mb-16" level={4}>
+              Path
+            </Typography.Title>
+
+            <PathContent path={path} isEthereumPath={isEthereumPath} />
+
+          </Col>
+          <Col xs={24} md={12}>
+            <Typography.Title className="mt-0 mb-16" level={4}>
+              Details
+            </Typography.Title>
+            <Flex gap={32} vertical>
+              <Collapse items={detailsItems} defaultActiveKey={['1', '2', '3']} />
+            </Flex>
+          </Col>
+        </Row>
+      </StyledMain>
+    </>
+  );
 };
 
 PathDetailPage.propTypes = {
   path: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    imagePath: PropTypes.string.isRequired,
-    detail: PropTypes.string.isRequired,
-    links: PropTypes.arrayOf(PropTypes.shape(PathDetailLink.propTypes)),
+    network: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    bond: PropTypes.shape({
+      lpTokenName: PropTypes.string.isRequired,
+      lpTokenBridge: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+      }).isRequired,
+      bridgedLpTokenAddress: PropTypes.string.isRequired,
+    }).isRequired,
+    networkId: PropTypes.string.isRequired,
   }).isRequired,
-  markdown: PropTypes.string.isRequired,
 };
 
 export default PathDetailPage;

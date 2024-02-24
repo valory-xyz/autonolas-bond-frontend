@@ -1,39 +1,95 @@
 [
   {
-    "id": "eth-olas",
-    "name": "ETH-OLAS",      
-    "imagePath": "/images/paths/eth-olas.svg",
-    "detail": "Get XDAI-OLAS LP tokens on Ethereum and bond into the Olas protocol.",
-    "links": []
+    "id": "olas-wxdai-via-balancer-on-gnosis-chain",
+    "name": "OLAS-WXDAI via Balancer on Gnosis Chain",
+    "network": "Gnosis Chain",
+    "networkId": "gnosis-chain",
+    "address": "0xcE11e14225575945b8E6Dc0D4F2dD4C570f79d9f",
+    "explorerBaseUrl": "https://gnosisscan.io/token/",
+    "exchange": {
+      "name": "Balancer",
+      "url": "https://app.balancer.fi/#/gnosis-chain/pool/0x79c872ed3acb3fc5770dd8a0cd9cd5db3b3ac985000200000000000000000067",
+      "poolAddress": "0x79c872ed3acb3fc5770dd8a0cd9cd5db3b3ac985"
+    },
+    "bridge": { "name": "Omnibridge", "url": "https://omni.gnosischain.com/bridge" },
+    "bond": {
+      "lpTokenName": "OLAS-WXDAI",
+      "lpPairTokenTicker": "WXDAI",
+      "bridgedLpTokenAddress": "0x27df632fd0dcf191c418c803801d521cd579f18e",
+      "lpTokenBridge": { "name": "Omnibridge", "url": "https://omni.gnosischain.com/bridge" }
+    }
   },
   {
-    "id": "xdai-olas",
-    "name": "XDAI-OLAS",      
-    "imagePath": "/images/paths/xdai-olas.svg",
-    "detail": "Get XDAI-OLAS LP tokens on Gnosis Chain. Bridge them back to Ethereum and bond into the Olas protocol.",
-    "links": [
-      {"headerText": "BRIDGE – OLAS FROM ETHEREUM TO GNOSIS CHAIN", "prefixText": "","linkHref": "#", "linkText": "{Bridge Name}"},
-      {"headerText": "BRIDGE – LP TOKEN FROM GNOSIS CHAIN TO ETHEREUM", "linkHref": "#", "linkText": "{Bridge Name}"},
-      {"headerText": "EXCHANGE AND POOL", "linkHref": "#", "linkText": "0x312...123", "linkPrefix": "{Exchange name}: XDAI-OLAS pool ·", "copyText": "0x312123123123123123"},
-      {"headerText": "LP TOKEN ADDRESS", "linkHref": "#", "linkText": "0x312...123", "copyText": "0x312123123123123123"},
-      {"headerText": "OLAS TOKEN ADDRESS: ETHEREUM", "linkHref": "#", "linkText": "0x312...123", "copyText": "0x312123123123123123"},
-      {"headerText": "OLAS TOKEN ADDRESS: GNOSIS CHAIN", "linkHref": "#", "linkText": "0x312...123", "copyText": "0x312123123123123123"},
-      {"headerText": "XDAI TOKEN ADDRESS: GNOSIS CHAIN", "linkHref": "#", "linkText": "0x312...123", "copyText": "0x312123123123123123"}
-    ]
+    "id": "olas-weth-via-balancer-on-arbitrum",
+    "name": "OLAS-WETH via Balancer on Arbitrum",
+    "network": "Arbitrum",
+    "networkId": "arbitrum",
+    "address": "0x064f8b858c2a603e1b106a2039f5446d32dc81c1",
+    "explorerBaseUrl": "https://arbiscan.io/token/",
+    "exchange": {
+      "name": "Balancer",
+      "url": "https://app.balancer.fi/#/arbitrum/pool/0xaf8912a3c4f55a8584b67df30ee0ddf0e60e01f80002000000000000000004fc",
+      "poolAddress": "0xaf8912a3c4f55a8584b67df30ee0ddf0e60e01f8"
+    },
+    "bridge": { "name": "Arbitrum Bridge", "url": "https://bridge.arbitrum.io/?destinationChain=arbitrum-one&sourceChain=ethereum" },
+    "bond": {
+      "guideUrl": "https://olas.network/blog/bonding-guide-polygon-arbitrum",
+      "lpTokenName": "OLAS-WETH",
+      "lpPairTokenTicker": "WETH",
+      "bridgedLpTokenAddress": "0x36B203Cb3086269f005a4b987772452243c0767f",
+      "lpTokenBridge": {
+        "name": "Wormhole: Portal Token Bridge",
+        "url": "https://portalbridge.com/advanced-tools/#/transfer"
+      }
+    }
   },
   {
-    "id": "matic-olas",
-    "name": "MATIC-OLAS",      
-    "imagePath": "/images/paths/matic-olas.svg",
-    "detail": "Get XDAI-OLAS LP tokens on Polygon. Bridge them back to Ethereum and bond into the Olas protocol.",
-    "links": []
+    "id": "olas-wmatic-via-balancer-on-polygon-pos",
+    "name": "OLAS-WMATIC via Balancer on Polygon POS",
+    "network": "Polygon POS",
+    "networkId": "polygon-pos",
+    "address": "0xFEF5d947472e72Efbb2E388c730B7428406F2F95",
+    "explorerBaseUrl": "https://polygonscan.com/token/",
+    "exchange": {
+      "name": "Balancer",
+      "url": "https://app.balancer.fi/#/polygon/pool/0x62309056c759c36879cde93693e7903bf415e4bc000200000000000000000d5f",
+      "poolAddress": "0x62309056c759c36879cde93693e7903bf415e4bc"
+
+    },
+    "bridge": {
+      "name": "Polygon Portal",
+      "url": "https://portal.polygon.technology/bridge"
+    },
+    "bond": {
+      "guideUrl": "https://olas.network/blog/bonding-guide-polygon-arbitrum",
+      "lpTokenName": "WMATIC-OLAS",
+      "lpPairTokenTicker": "WMATIC",
+      "bridgedLpTokenAddress": "0xf9825A563222f9eFC81e369311DAdb13D68e60a4",
+      "lpTokenBridge": {
+        "name": "Wormhole: Portal Token Bridge",
+        "url": "https://portalbridge.com/advanced-tools/#/transfer"
+      }
+    }
   },
   {
-    "id": "arb-olas",
-    "name": "ARB-OLAS",      
-    "imagePath": "/images/paths/arb-olas.svg",
-    "detail": "Get ARB-OLAS LP tokens on Arbitrum. Bridge them back to Ethereum and bond into the Olas protocol.",
-    "links": []
+    "id": "olas-eth-via-uniswap-on-ethereum",
+    "name": "OLAS-ETH via Uniswap on Ethereum",
+    "network": "Ethereum",
+    "networkId": "ethereum",
+    "address": "0x0001A500A6B18995B03f44bb040A5fFc28E45CB0",
+    "explorerBaseUrl": "https://etherscan.io/token/",
+    "exchange": {
+      "name": "Uniswap",
+      "url": "https://app.uniswap.org/swap?inputCurrency=ETH&outputCurrency=0x0001a500a6b18995b03f44bb040a5ffc28e45cb0",
+      "poolAddress": "0x09d1d767edf8fa23a64c51fa559e0688e526812f"
+    },
+    "bridge": null,
+    "bond": {
+      "guideUrl": "https://olas.network/blog/inaugural-bonding-programme-proposal",
+      "lpTokenName": "OLAS-ETH",
+      "lpPairTokenTicker": "ETH",
+      "bridgedLpTokenAddress": null,
+      "bridge": null
+    }
   }
 ]
-
