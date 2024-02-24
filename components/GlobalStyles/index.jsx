@@ -26,9 +26,6 @@ const GlobalStyle = createGlobalStyle`
   .m-0 {
     margin: 0 !important;
   }
-  .mb-12 {
-    margin-bottom: 12px;
-  }
   .mb-0 {
     margin-bottom: 0px !important;
   }
@@ -43,6 +40,9 @@ const GlobalStyle = createGlobalStyle`
   }
   .mb-16 {
     margin-bottom: 16px !important;
+  }
+  .mb-24 {
+    margin-bottom: 24px !important;
   }
   .mb-128 {
     margin-bottom: 128px !important;
@@ -86,6 +86,10 @@ const GlobalStyle = createGlobalStyle`
   }
   .hide-only-sm {
     display: initial;
+  }
+
+  .text-center {
+    text-align: center !important;
   }
 
   /* layout */

@@ -1,7 +1,7 @@
 export const SITE = {
   URL: 'https://bond.olas.network',
   TITLE: 'Olas Bond',
-  DESCRIPTION: 'Bonders provide tokens to the protocol, and receive discounted OLAS in exchange.',
+  DESCRIPTION: 'Get access to discounted OLAS by bonding capital into the Olas protocol.',
 };
 
 export const OPERATOR_NAME = 'Olas (aka Autonolas) DAO';
