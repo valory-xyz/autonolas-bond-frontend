@@ -80,7 +80,7 @@
     "explorerBaseUrl": "https://etherscan.io/token/",
     "exchange": {
       "name": "Uniswap",
-      "url": "https://app.uniswap.org/swap?inputCurrency=ETH&outputCurrency=0x0001a500a6b18995b03f44bb040a5ffc28e45cb0",
+      "url": "https://v2.info.uniswap.org/pair/0x09d1d767edf8fa23a64c51fa559e0688e526812f",
       "poolAddress": "0x09d1d767edf8fa23a64c51fa559e0688e526812f"
     },
     "bridge": null,
