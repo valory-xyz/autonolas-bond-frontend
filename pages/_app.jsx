@@ -17,7 +17,7 @@ const MyApp = ({ Component, pageProps }) => (
     <GlobalStyle />
     <Head>
       {/* <!-- Primary Meta Tags --> */}
-      <title>Build | Olas</title>
+      <title>Bond | Olas</title>
       <meta name="title" content={TITLE} />
       <meta name="description" content={DESCRIPTION} />
 

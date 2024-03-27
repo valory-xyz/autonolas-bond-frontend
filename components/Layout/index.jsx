@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
-import {
-  Layout,
-} from 'antd';
+import { Layout } from 'antd';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -25,11 +23,10 @@ const NavigationBar = ({ children }) => {
     <CustomLayout pathname={router.pathname}>
       <StyledHeader>
         <Link href="/">
-          <div className="column-1" style={{ marginBottom: 10 }}>
+          <div className="column-1">
             <Logo />
           </div>
         </Link>
-
       </StyledHeader>
 
       <Content className="site-layout">
