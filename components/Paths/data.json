@@ -117,7 +117,7 @@
       "url": "https://app.optimism.io/bridge/deposit"
     },
     "bond": {
-      "guideUrl": "https://olas.network/blog/bonding-guide-polygon-arbitrum",
+      "guideUrl": "https://olas.network/blog/bonding-guide-optimism",
       "lpTokenName": "WETH-OLAS",
       "lpPairTokenTicker": "WETH",
       "bridgedLpTokenAddress": "0x2FD007a534eB7527b535a1DF35aba6bD2a8b660F",
