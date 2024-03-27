@@ -33,6 +33,7 @@ export const getExplorerBaseUrl = (networkId) => {
     'gnosis-chain': 'https://gnosisscan.io/address/',
     arbitrum: 'https://arbiscan.io/address/',
     'polygon-pos': 'https://polygonscan.com/address/',
+    optimism: 'https://optimistic.etherscan.io/address/',
   };
   return networkMap[networkId] || 'https://etherscan.io/address/';
 };
