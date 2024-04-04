@@ -147,6 +147,7 @@
       "guideUrl": "https://olas.network/blog/bonding-guide-base",
       "lpTokenName": "OLAS-USDC",
       "lpPairTokenTicker": "USDC",
+      "lpPairTokenTickerLink": "https://basescan.org/address/0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
       "bridgedLpTokenAddress": "0x9946d6FD1210D85EC613Ca956F142D911C97a074",
       "lpTokenBridge": {
         "name": "Wormhole: Portal Token Bridge",

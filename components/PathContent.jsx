@@ -11,7 +11,8 @@ const StyledLink = styled.a`
 const PathContent = ({
   path: {
     bond, network, exchange, bridge,
-  }, isEthereumPath,
+  },
+  isEthereumPath,
 }) => {
   const steps = [
     <>
@@ -37,11 +38,7 @@ const PathContent = ({
       {network}
       . You can acquire it on
       {' '}
-      <StyledLink
-        href={exchange.url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
         {exchange.name}
       </StyledLink>
       {' '}
@@ -60,11 +57,7 @@ const PathContent = ({
       {' '}
       and
       {' '}
-      <StyledLink
-        href={bridge?.url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <StyledLink href={bridge?.url} target="_blank" rel="noopener noreferrer">
         bridge it with
         {' '}
         {bridge?.name}
@@ -74,7 +67,17 @@ const PathContent = ({
     <>
       Get
       {' '}
-      {bond.lpPairTokenTicker}
+      {bond.lpPairTokenTickerLink ? (
+        <StyledLink
+          href={bond.lpPairTokenTickerLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {bond.lpPairTokenTicker}
+        </StyledLink>
+      ) : (
+        bond.lpPairTokenTicker
+      )}
       {' '}
       on
       {' '}
@@ -95,15 +98,10 @@ const PathContent = ({
       {' '}
       tokens into the
       {' '}
-      <StyledLink
-        href={exchange.url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
         {bond.lpTokenName}
         {' '}
         pool on
-        {' '}
         {network}
         {' '}
         {exchange.name}
@@ -175,11 +173,7 @@ const PathContent = ({
       {network}
       . You can acquire it on
       {' '}
-      <StyledLink
-        href={exchange.url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
         {exchange.name}
       </StyledLink>
       {' '}
@@ -205,18 +199,8 @@ const PathContent = ({
       {' '}
       tokens into the
       {' '}
-      <StyledLink
-        href={exchange.url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {bond.lpTokenName}
-        {' '}
-        pool on
-        {' '}
-        {network}
-        {' '}
-        {exchange.name}
+      <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
+        {`${bond.lpTokenName} pool on ${network} ${exchange.name}`}
       </StyledLink>
       .
     </>,
@@ -245,7 +229,7 @@ const PathContent = ({
     <List
       size="large"
       bordered
-      dataSource={!isEthereumPath ? steps : ethereumSteps}
+      dataSource={isEthereumPath ? ethereumSteps : steps}
       renderItem={(item, i) => (
         <List.Item>
           <Flex gap={16} align="top">
@@ -266,6 +250,7 @@ PathContent.propTypes = {
     bond: PropTypes.shape({
       lpTokenName: PropTypes.string.isRequired,
       lpPairTokenTicker: PropTypes.string.isRequired,
+      lpPairTokenTickerLink: PropTypes.string,
       lpTokenBridge: PropTypes.shape({
         url: PropTypes.string,
         name: PropTypes.string,
