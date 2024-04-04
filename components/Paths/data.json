@@ -126,5 +126,33 @@
         "url": "https://portalbridge.com/advanced-tools/#/transfer"
       }
     }
+  },
+  {
+    "id": "olas-usdc-via-balancer-on-base",
+    "name": "OLAS-USDC via Balancer on Base",
+    "network": "Base",
+    "networkId": "base",
+    "address": "0x54330d28ca3357F294334BDC454a032e7f353416",
+    "explorerBaseUrl": "https://basescan.org/token/",
+    "exchange": {
+      "name": "Balancer",
+      "url": "https://app.balancer.fi/#/base/pool/0x5332584890d6e415a6dc910254d6430b8aab7e69000200000000000000000103",
+      "poolAddress": "0x5332584890d6e415a6dc910254d6430b8aab7e69"
+    },
+    "bridge": {
+      "name": "BaseBridge contract",
+      "url": "https://etherscan.io/address/0x3154cf16ccdb4c6d922629664174b904d80f2c35"
+    },
+    "bond": {
+      "guideUrl": "https://olas.network/blog/bonding-guide-base",
+      "lpTokenName": "OLAS-USDC",
+      "lpPairTokenTicker": "USDC",
+      "lpPairTokenTickerLink": "https://basescan.org/address/0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "bridgedLpTokenAddress": "0x9946d6FD1210D85EC613Ca956F142D911C97a074",
+      "lpTokenBridge": {
+        "name": "Wormhole: Portal Token Bridge",
+        "url": "https://portalbridge.com/advanced-tools/#/transfer"
+      }
+    }
   }
 ]

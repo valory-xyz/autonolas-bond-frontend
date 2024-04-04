@@ -34,6 +34,7 @@ export const getExplorerBaseUrl = (networkId) => {
     arbitrum: 'https://arbiscan.io/address/',
     'polygon-pos': 'https://polygonscan.com/address/',
     optimism: 'https://optimistic.etherscan.io/address/',
+    base: 'https://basescan.org/address/',
   };
   return networkMap[networkId] || 'https://etherscan.io/address/';
 };
