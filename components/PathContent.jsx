@@ -99,12 +99,7 @@ const PathContent = ({
       tokens into the
       {' '}
       <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
-        {bond.lpTokenName}
-        {' '}
-        pool on
-        {network}
-        {' '}
-        {exchange.name}
+        {`${bond.lpTokenName} pool on ${network} ${exchange.name}`}
       </StyledLink>
       .
     </>,
