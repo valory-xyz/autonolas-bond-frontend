@@ -41,12 +41,7 @@ const PathContent = ({
       <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
         {exchange.name}
       </StyledLink>
-      {' '}
-      directly on
-      {' '}
-      {network}
-      , or
-      {' '}
+      {` directly on ${network}, or `}
       <StyledLink
         href="https://app.uniswap.org/"
         target="_blank"
@@ -63,6 +58,19 @@ const PathContent = ({
         {bridge?.name}
       </StyledLink>
       .
+      {bond?.guideUrl && (
+        <>
+          {` For more information on how to bridge with the ${bridge?.name}, see this `}
+          <StyledLink
+            href={bond.guideUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            guide
+          </StyledLink>
+          .
+        </>
+      )}
     </>,
     <>
       Get
@@ -243,6 +251,7 @@ const PathContent = ({
 PathContent.propTypes = {
   path: PropTypes.shape({
     bond: PropTypes.shape({
+      guideUrl: PropTypes.string.isRequired,
       lpTokenName: PropTypes.string.isRequired,
       lpPairTokenTicker: PropTypes.string.isRequired,
       lpPairTokenTickerLink: PropTypes.string,
