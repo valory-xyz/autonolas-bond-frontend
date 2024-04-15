@@ -124,7 +124,7 @@ const PoolCollapseItem = ({
         <Address
           address={exchange.poolAddress}
           networkId={networkId}
-          customExplorerUrl={exchange.customPoolExplorerUrl}
+          customExplorerUrl={exchange.lpTokenExplorer}
         />
       </Flex>
     </Flex>
@@ -137,16 +137,10 @@ const PoolCollapseItem = ({
         {`${bond.lpTokenName} ${bond.isFungible ? 'fungible token ' : ''}`}
 
         {/* TODO ensure LP token address is the same as poolAddress */}
-
-        {exchange.lpTokenAddress ? (
-          <Address
-            address={exchange.lpTokenAddress}
-            networkId={networkId}
-            customExplorerUrl={exchange.lpTokenExplorer}
-          />
-        ) : (
-          <Address address={exchange.poolAddress} networkId={networkId} />
-        )}
+        <Address
+          address={exchange.lpTokenAddress || exchange.poolAddress}
+          networkId={networkId}
+        />
       </Flex>
     </Flex>
   </Flex>

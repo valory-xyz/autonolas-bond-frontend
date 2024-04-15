@@ -19,8 +19,10 @@ const SvmDeposit = () => (
     to get fungible tokens representing
     {' '}
     <StyledLink href="https://www.orca.so/liquidity?address=5dMKUYJDsjZkAD3wiV3ViQkuq9pSmWQ5eAzcQLtDnUT3" target="_blank" rel="noopener noreferrer">
-      full range WSOL-OLAS LP positions on Orca  WSOL-OLAS pool.
+      full range WSOL-OLAS LP positions on Orca
     </StyledLink>
+    {' '}
+    WSOL-OLAS pool.
   </>
 );
 
