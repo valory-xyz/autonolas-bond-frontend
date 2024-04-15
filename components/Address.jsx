@@ -9,8 +9,8 @@ const AddressText = styled(Typography.Text)`
   title: ${(props) => props.title};
 `;
 
-const Address = ({ address, networkId }) => {
-  const explorerBaseUrl = getExplorerBaseUrl(networkId);
+const Address = ({ address, networkId, customExplorerUrl }) => {
+  const explorerBaseUrl = customExplorerUrl ?? getExplorerBaseUrl(networkId);
 
   const explorerUrl = `${explorerBaseUrl}${address}`;
 
@@ -23,7 +23,7 @@ const Address = ({ address, networkId }) => {
           ↗
         </a>
       </AddressText>
-    &nbsp;
+      &nbsp;
       <Copy copyText={address} />
     </>
   );
@@ -32,9 +32,11 @@ const Address = ({ address, networkId }) => {
 Address.propTypes = {
   address: PropTypes.string.isRequired,
   networkId: PropTypes.string,
+  customExplorerUrl: PropTypes.string,
 };
 
 Address.defaultProps = {
   networkId: 'ethereum',
+  customExplorerUrl: undefined,
 };
 export default Address;

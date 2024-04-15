@@ -35,7 +35,7 @@ export const getExplorerBaseUrl = (networkId) => {
     'polygon-pos': 'https://polygonscan.com/address/',
     optimism: 'https://optimistic.etherscan.io/address/',
     base: 'https://basescan.org/address/',
-    solana: 'https://solscan.io/token/',
+    solana: 'https://solscan.io/account/',
   };
   return networkMap[networkId] || 'https://etherscan.io/address/';
 };

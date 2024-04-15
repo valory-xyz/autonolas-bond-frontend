@@ -165,7 +165,9 @@
     "exchange": {
       "name": "Orca",
       "url": "https://www.orca.so/liquidity?address=5dMKUYJDsjZkAD3wiV3ViQkuq9pSmWQ5eAzcQLtDnUT3",
-      "poolAddress": "CeZ77ti3nPAmcgRkBkUC1JcoAhR8jRti2DHaCcuyUnzR"
+      "poolAddress": "5dMKUYJDsjZkAD3wiV3ViQkuq9pSmWQ5eAzcQLtDnUT3",
+      "lpTokenExplorer": "https://solscan.io/account/",
+      "lpTokenAddress": "CeZ77ti3nPAmcgRkBkUC1JcoAhR8jRti2DHaCcuyUnzR"
     },
     "bridge": {
       "name": "Wormhole: Portal Token Bridge",
@@ -174,8 +176,8 @@
     "bond": {
       "lpTokenName": "OLAS-WSOL",
       "lpPairTokenTicker": "SOL or WSOL",
-      "lpPairTokenTickerLink": "",
-      "bridgedLpTokenAddress": "",
+      "bridgedLpTokenAddress": "0x3685b8cc36b8df09ed9e81c1690100306bf23e04",
+      "isFungible": true,
       "lpTokenBridge": {
         "name": "Wormhole: Portal Token Bridge",
         "url": "https://portalbridge.com/advanced-tools/#/transfer"
