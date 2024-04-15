@@ -8,10 +8,27 @@ const StyledLink = styled.a`
   color: ${COLOR.GREY_2};
 `;
 
+const SvmDeposit = () => (
+  <>
+    Deposit SOL or WSOL and OLAS tokens using the Lockbox via
+    {' '}
+    <StyledLink href="https://tokenomics.olas.network/manage-solana-products" target="_blank" rel="noopener noreferrer">
+      manage Solana products
+    </StyledLink>
+    {' '}
+    to get fungible tokens representing
+    {' '}
+    <StyledLink href="https://www.orca.so/liquidity?address=5dMKUYJDsjZkAD3wiV3ViQkuq9pSmWQ5eAzcQLtDnUT3" target="_blank" rel="noopener noreferrer">
+      full range WSOL-OLAS LP positions on Orca  WSOL-OLAS pool.
+    </StyledLink>
+  </>
+);
+
 const PathContent = ({
   path: {
     bond, network, exchange, bridge,
   },
+  networkId,
   isEthereumPath,
 }) => {
   const steps = [
@@ -86,30 +103,27 @@ const PathContent = ({
       ) : (
         bond.lpPairTokenTicker
       )}
-      {' '}
-      on
-      {' '}
-      {network}
-      . You can acquire it on
-      {' '}
-      {exchange.name}
-      {' '}
-      directly on
-      {' '}
-      {network}
-      .
+      {` on ${network}. You can acquire it on ${exchange.name} directly on ${network}.`}
     </>,
     <>
-      Pool OLAS and
-      {' '}
-      {bond.lpPairTokenTicker}
-      {' '}
-      tokens into the
-      {' '}
-      <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
-        {`${bond.lpTokenName} pool on ${network} ${exchange.name}`}
-      </StyledLink>
-      .
+      {
+        networkId === 'solana' ? (
+          <SvmDeposit />
+        ) : (
+          <>
+            Pool OLAS and
+            {' '}
+            {bond.lpPairTokenTicker}
+            {' '}
+            tokens into the
+            {' '}
+            <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
+              {`${bond.lpTokenName} pool on ${network} ${exchange.name}`}
+            </StyledLink>
+            .
+          </>
+        )
+      }
     </>,
     <>
       Await receipt of LP tokens representing your stake in the
@@ -161,39 +175,21 @@ const PathContent = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        profitable
-        {' '}
-        {bond.lpTokenName}
-        {' '}
-        products
+        {` profitable ${bond.lpTokenName} products`}
       </StyledLink>
       {' '}
       available.
     </>,
     <>
-      Get OLAS on
-      {' '}
-      {network}
-      . You can acquire it on
-      {' '}
+
+      {`Get OLAS on ${network}. You can acquire it on `}
       <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
         {exchange.name}
       </StyledLink>
-      {' '}
-      directly on
-      {' '}
-      {network}
-      .
+      {` directly on ${network}.`}
     </>,
     <>
-      Get
-      {' '}
-      {bond.lpPairTokenTicker}
-      {' '}
-      on
-      {' '}
-      {network}
-      .
+      {`Get ${bond.lpPairTokenTicker} on ${network}.`}
     </>,
     <>
       Pool OLAS and
@@ -270,6 +266,7 @@ PathContent.propTypes = {
       name: PropTypes.string,
     }),
   }).isRequired,
+  networkId: PropTypes.string.isRequired,
   isEthereumPath: PropTypes.bool.isRequired,
 };
 

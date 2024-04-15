@@ -154,5 +154,32 @@
         "url": "https://portalbridge.com/advanced-tools/#/transfer"
       }
     }
+  },
+  {
+    "id": "olas-wsol-via-orca-on-solana",
+    "name": "OLAS-WSOL via Orca on Solana",
+    "network": "Solana",
+    "networkId": "solana",
+    "address": "Ez3nzG9ofodYCvEmw73XhQ87LWNYVRM2s7diB5tBZPyM",
+    "explorerBaseUrl": "https://solscan.io/account/",
+    "exchange": {
+      "name": "Orca",
+      "url": "https://www.orca.so/liquidity?address=5dMKUYJDsjZkAD3wiV3ViQkuq9pSmWQ5eAzcQLtDnUT3",
+      "poolAddress": "CeZ77ti3nPAmcgRkBkUC1JcoAhR8jRti2DHaCcuyUnzR"
+    },
+    "bridge": {
+      "name": "Wormhole: Portal Token Bridge",
+      "url": "https://portalbridge.com/advanced-tools/#/transfer"
+    },
+    "bond": {
+      "lpTokenName": "OLAS-WSOL",
+      "lpPairTokenTicker": "SOL or WSOL",
+      "lpPairTokenTickerLink": "",
+      "bridgedLpTokenAddress": "",
+      "lpTokenBridge": {
+        "name": "Wormhole: Portal Token Bridge",
+        "url": "https://portalbridge.com/advanced-tools/#/transfer"
+      }
+    }
   }
 ]

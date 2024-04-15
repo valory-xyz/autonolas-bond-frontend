@@ -67,30 +67,30 @@ const PoolCollapseItem = ({
 }) => (
   <Flex gap={16} vertical>
     {!isEthereumPath && (
-    <Flex gap={4} vertical>
-      <Upcase>
-        OLAS address on Ethereum
-      </Upcase>
-      <Flex gap={8} align="center">
-        <Address address={OLAS_ETHEREUM_TOKEN_ADDRESS} />
+      <Flex gap={4} vertical>
+        <Upcase>
+          OLAS address on Ethereum
+        </Upcase>
+        <Flex gap={8} align="center">
+          <Address address={OLAS_ETHEREUM_TOKEN_ADDRESS} />
+        </Flex>
       </Flex>
-    </Flex>
     )}
     {!isEthereumPath && (
-    <Flex gap={4} vertical>
-      <Upcase>
-        Bridge OLAS from Ethereum to
-        {' '}
-        {network}
-      </Upcase>
-      <Flex gap={8} align="center">
-        <a href={bridge?.url} target="_blank" rel="noopener noreferrer">
-          {bridge?.name}
+      <Flex gap={4} vertical>
+        <Upcase>
+          Bridge OLAS from Ethereum to
           {' '}
-          ↗
-        </a>
+          {network}
+        </Upcase>
+        <Flex gap={8} align="center">
+          <a href={bridge?.url} target="_blank" rel="noopener noreferrer">
+            {bridge?.name}
+            {' '}
+            ↗
+          </a>
+        </Flex>
       </Flex>
-    </Flex>
     )}
     <Flex gap={4} vertical>
       <Upcase>
@@ -290,20 +290,20 @@ const PathDetailPage = ({
                 .
                 {' '}
                 {
-                !isEthereumPath ? 'Bridge them to Ethereum and bond into the Olas protocol.' : 'Bond them into the Olas protocol.'
-              }
+                  !isEthereumPath ? 'Bridge them to Ethereum and bond into the Olas protocol.' : 'Bond them into the Olas protocol.'
+                }
               </Typography.Text>
             </div>
           </Col>
         </Row>
+
         <Row gutter={[48, 48]}>
           <Col xs={24} lg={12}>
             <Typography.Title className="mt-0 mb-16" level={4}>
               Path
             </Typography.Title>
 
-            <PathContent path={path} isEthereumPath={isEthereumPath} />
-
+            <PathContent path={path} isEthereumPath={isEthereumPath} networkId={networkId} />
           </Col>
           <Col xs={24} md={12}>
             <Typography.Title className="mt-0 mb-16" level={4}>
