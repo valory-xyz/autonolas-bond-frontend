@@ -239,7 +239,7 @@ BondCollapseItem.propTypes = {
 
 const PathDetailPage = ({
   path: {
-    name, network, id, bond, networkId,
+    name, network, id, bond, networkId, customSubtitle,
   },
   path,
 }) => {
@@ -278,31 +278,26 @@ const PathDetailPage = ({
       </Head>
       <StyledMain>
         <Row align="middle" className="mb-24" gutter={48}>
-          <Col className={!md && 'mb-16'}>
+          <Col className={!md && 'mb-16'} xl={6} md={6} sm={8} xs={24}>
             <StyledCard>
               <StyledImageWrapper>
                 <Image src={`/images/paths/${id}.svg`} alt={name} width={200} height={100} />
               </StyledImageWrapper>
             </StyledCard>
           </Col>
-          <Col>
+
+          <Col xl={18} md={18} sm={16} xs={24}>
             <div>
               <Typography.Title className="mt-0 mb-16" level={2}>
                 {name}
               </Typography.Title>
               <Typography.Text>
-                Get
-                {' '}
-                {bond.lpTokenName}
-                {' '}
-                LP tokens on
-                {' '}
-                {network}
-                .
-                {' '}
-                {
-                  !isEthereumPath ? 'Bridge them to Ethereum and bond into the Olas protocol.' : 'Bond them into the Olas protocol.'
-                }
+                {customSubtitle || (
+                  <>
+                    {`Get ${bond.lpTokenName} LP tokens on ${network}. `}
+                    {!isEthereumPath ? 'Bridge them to Ethereum and bond into the Olas protocol.' : 'Bond them into the Olas protocol.'}
+                  </>
+                )}
               </Typography.Text>
             </div>
           </Col>
@@ -344,6 +339,7 @@ PathDetailPage.propTypes = {
       bridgedLpTokenAddress: PropTypes.string.isRequired,
     }).isRequired,
     networkId: PropTypes.string.isRequired,
+    customSubtitle: PropTypes.string,
   }).isRequired,
 };
 

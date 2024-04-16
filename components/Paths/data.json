@@ -157,7 +157,8 @@
   },
   {
     "id": "olas-wsol-via-orca-on-solana",
-    "name": "OLAS-WSOL via Orca on Solana",
+    "name": "WSOL-OLAS via Orca on Solana",
+    "customSubtitle": "Get WSOL-OLAS LP fungible tokens. Such tokens are a fungible representation of full-range Orca WSOL-OLAS positions. Bridge the fungible tokens to Ethereum and bond into the Olas protocol.",
     "network": "Solana",
     "networkId": "solana",
     "address": "Ez3nzG9ofodYCvEmw73XhQ87LWNYVRM2s7diB5tBZPyM",
@@ -174,7 +175,7 @@
       "url": "https://portalbridge.com/advanced-tools/#/transfer"
     },
     "bond": {
-      "lpTokenName": "OLAS-WSOL",
+      "lpTokenName": "WSOL-OLAS",
       "lpPairTokenTicker": "SOL or WSOL",
       "bridgedLpTokenAddress": "0x3685b8cc36b8df09ed9e81c1690100306bf23e04",
       "isFungible": true,
