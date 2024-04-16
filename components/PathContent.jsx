@@ -108,43 +108,28 @@ const PathContent = ({
       {` on ${network}. You can acquire it on ${exchange.name} directly on ${network}.`}
     </>,
     <>
-      {
-        networkId === 'solana' ? (
-          <SvmDeposit />
-        ) : (
-          <>
-            Pool OLAS and
-            {' '}
-            {bond.lpPairTokenTicker}
-            {' '}
-            tokens into the
-            {' '}
-            <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
-              {`${bond.lpTokenName} pool on ${network} ${exchange.name}`}
-            </StyledLink>
-            .
-          </>
-        )
-      }
+      {networkId === 'solana' ? (
+        <SvmDeposit />
+      ) : (
+        <>
+          Pool OLAS and
+          {' '}
+          {bond.lpPairTokenTicker}
+          {' '}
+          tokens into the
+          {' '}
+          <StyledLink href={exchange.url} target="_blank" rel="noopener noreferrer">
+            {`${bond.lpTokenName} pool on ${network} ${exchange.name}`}
+          </StyledLink>
+          .
+        </>
+      )}
     </>,
     <>
-      Await receipt of LP tokens representing your stake in the
-      {' '}
-      {bond.lpTokenName}
-      {' '}
-      pool.
+      {`Await receipt of LP tokens representing your stake in the ${bond.lpTokenName} pool.`}
     </>,
     <>
-      Bridge
-      {' '}
-      {bond.lpTokenName}
-      {' '}
-      tokens from
-      {' '}
-      {network}
-      {' '}
-      to Ethereum using
-      {' '}
+      {`Bridge ${bond.lpTokenName} ${bond.isFungible ? 'LP fungible' : ''} tokens from ${network} to Ethereum using `}
       <StyledLink
         href={bond.lpTokenBridge?.url}
         target="_blank"
@@ -257,6 +242,7 @@ PathContent.propTypes = {
         url: PropTypes.string,
         name: PropTypes.string,
       }),
+      isFungible: PropTypes.bool,
     }).isRequired,
     network: PropTypes.string.isRequired,
     exchange: PropTypes.shape({
