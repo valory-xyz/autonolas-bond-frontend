@@ -67,30 +67,30 @@ const PoolCollapseItem = ({
 }) => (
   <Flex gap={16} vertical>
     {!isEthereumPath && (
-    <Flex gap={4} vertical>
-      <Upcase>
-        OLAS address on Ethereum
-      </Upcase>
-      <Flex gap={8} align="center">
-        <Address address={OLAS_ETHEREUM_TOKEN_ADDRESS} />
+      <Flex gap={4} vertical>
+        <Upcase>
+          OLAS address on Ethereum
+        </Upcase>
+        <Flex gap={8} align="center">
+          <Address address={OLAS_ETHEREUM_TOKEN_ADDRESS} />
+        </Flex>
       </Flex>
-    </Flex>
     )}
     {!isEthereumPath && (
-    <Flex gap={4} vertical>
-      <Upcase>
-        Bridge OLAS from Ethereum to
-        {' '}
-        {network}
-      </Upcase>
-      <Flex gap={8} align="center">
-        <a href={bridge?.url} target="_blank" rel="noopener noreferrer">
-          {bridge?.name}
+      <Flex gap={4} vertical>
+        <Upcase>
+          Bridge OLAS from Ethereum to
           {' '}
-          ↗
-        </a>
+          {network}
+        </Upcase>
+        <Flex gap={8} align="center">
+          <a href={bridge?.url} target="_blank" rel="noopener noreferrer">
+            {bridge?.name}
+            {' '}
+            ↗
+          </a>
+        </Flex>
       </Flex>
-    </Flex>
     )}
     <Flex gap={4} vertical>
       <Upcase>
@@ -102,6 +102,7 @@ const PoolCollapseItem = ({
         <Address address={address} networkId={networkId} />
       </Flex>
     </Flex>
+
     <Flex gap={4} vertical>
       <Upcase>
         Pool Exchange
@@ -114,22 +115,32 @@ const PoolCollapseItem = ({
         </a>
       </Flex>
     </Flex>
+
     <Flex gap={4} vertical>
       <Upcase>
         Pool
       </Upcase>
       <Flex gap={8} align="center">
-        <Address address={exchange.poolAddress} networkId={networkId} />
+        <Address
+          address={exchange.poolAddress}
+          networkId={networkId}
+          customExplorerUrl={exchange.lpTokenExplorer}
+        />
       </Flex>
     </Flex>
+
     <Flex gap={4} vertical>
       <Upcase>
         LP Token
       </Upcase>
       <Flex gap={8} align="center">
-        {bond.lpTokenName}
+        {`${bond.lpTokenName} ${bond.isFungible ? 'fungible token ' : ''}`}
+
         {/* TODO ensure LP token address is the same as poolAddress */}
-        <Address address={exchange.poolAddress} networkId={networkId} />
+        <Address
+          address={exchange.lpTokenAddress || exchange.poolAddress}
+          networkId={networkId}
+        />
       </Flex>
     </Flex>
   </Flex>
@@ -228,7 +239,7 @@ BondCollapseItem.propTypes = {
 
 const PathDetailPage = ({
   path: {
-    name, network, id, bond, networkId,
+    name, network, id, bond, networkId, customSubtitle,
   },
   path,
 }) => {
@@ -267,43 +278,38 @@ const PathDetailPage = ({
       </Head>
       <StyledMain>
         <Row align="middle" className="mb-24" gutter={48}>
-          <Col className={!md && 'mb-16'}>
+          <Col className={!md && 'mb-16'} xl={6} md={6} sm={8} xs={24}>
             <StyledCard>
               <StyledImageWrapper>
                 <Image src={`/images/paths/${id}.svg`} alt={name} width={200} height={100} />
               </StyledImageWrapper>
             </StyledCard>
           </Col>
-          <Col>
+
+          <Col xl={18} md={18} sm={16} xs={24}>
             <div>
               <Typography.Title className="mt-0 mb-16" level={2}>
                 {name}
               </Typography.Title>
               <Typography.Text>
-                Get
-                {' '}
-                {bond.lpTokenName}
-                {' '}
-                LP tokens on
-                {' '}
-                {network}
-                .
-                {' '}
-                {
-                !isEthereumPath ? 'Bridge them to Ethereum and bond into the Olas protocol.' : 'Bond them into the Olas protocol.'
-              }
+                {customSubtitle || (
+                  <>
+                    {`Get ${bond.lpTokenName} LP tokens on ${network}. `}
+                    {!isEthereumPath ? 'Bridge them to Ethereum and bond into the Olas protocol.' : 'Bond them into the Olas protocol.'}
+                  </>
+                )}
               </Typography.Text>
             </div>
           </Col>
         </Row>
+
         <Row gutter={[48, 48]}>
           <Col xs={24} lg={12}>
             <Typography.Title className="mt-0 mb-16" level={4}>
               Path
             </Typography.Title>
 
-            <PathContent path={path} isEthereumPath={isEthereumPath} />
-
+            <PathContent path={path} isEthereumPath={isEthereumPath} networkId={networkId} />
           </Col>
           <Col xs={24} md={12}>
             <Typography.Title className="mt-0 mb-16" level={4}>
@@ -333,6 +339,7 @@ PathDetailPage.propTypes = {
       bridgedLpTokenAddress: PropTypes.string.isRequired,
     }).isRequired,
     networkId: PropTypes.string.isRequired,
+    customSubtitle: PropTypes.string,
   }).isRequired,
 };
 
